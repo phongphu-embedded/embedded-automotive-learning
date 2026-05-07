@@ -58,6 +58,17 @@ circular buffer
 
 **Files:** `phase1-C-basics/day04-arrays/`
 
+### Day 5 — Pointers
+**Concepts:** Address-of (&), dereference (*), pass-by-pointer,
+pointer arithmetic, array-pointer equivalence  
+**Projects:**
+- Pointer basics: RAM address inspection
+- Swap function: pass-by-value vs pass-by-pointer
+- Array traversal using pointer arithmetic
+- Sensor Data Processor: 3 functions with pointer parameters  
+
+**Files:** `phase1-C-basics/day05-pointers/`
+
 ---
 
 ## Key Patterns Learned
