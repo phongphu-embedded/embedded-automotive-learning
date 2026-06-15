@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phong Phu Nguyen — Embedded Automotive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0F14;
+    --surface: #161B24;
+    --border: rgba(255,255,255,0.08);
+    --text: #F0F2F5;
+    --muted: #8A9BB0;
+    --accent: #00C4A7;
+    --yt: #FF4040;
+    --gh: #A78BFA;
+    --tt: #F0F2F5;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,196,167,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,196,167,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .profile {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .avatar-ring {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #7C3AED);
+    padding: 2px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  .name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+
+  .name span {
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .link-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .link-card:hover::before { opacity: 1; }
+
+  .link-card.yt { --card-accent: var(--yt); }
+  .link-card.gh { --card-accent: var(--gh); }
+  .link-card.tt { --card-accent: var(--tt); }
+
+  .link-card:hover { border-color: var(--card-accent); }
+  .link-card::before { background: var(--card-accent); }
+
+  .icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-wrap svg { width: 22px; height: 22px; }
+
+  .yt .icon-wrap svg { color: var(--yt); }
+  .gh .icon-wrap svg { color: var(--gh); }
+  .tt .icon-wrap svg { color: var(--tt); }
+
+  .link-text {
+    flex: 1;
+  }
+
+  .link-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .link-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .arrow {
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.15s, color 0.15s;
+  }
+
+  .link-card:hover .arrow {
+    transform: translateX(3px);
+    color: var(--card-accent);
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 11px;
+    color: rgba(138,155,176,0.5);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<div class="wrap">
+  <div class="profile">
+    <div class="avatar-ring">
+      <div class="avatar-inner">⚡</div>
+    </div>
+    <h1 class="name">Phong Phu <span>Nguyen</span></h1>
+    <p class="tagline">Embedded Automotive Engineer</p>
+  </div>
+
+  <div class="links">
+
+    <!-- YouTube -->
+    <a class="link-card yt" href="https://www.youtube.com/@phongphunguyen9353" target="_blank" rel="noopener">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">YouTube</div>
+        <div class="link-sub">@phongphunguyen9353</div>
+      </div>
+      <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+
+    <!-- GitHub -->
+    <a class="link-card gh" href="https://github.com/phongphu-embedded/embedded-automotive-learning" target="_blank" rel="noopener">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">GitHub</div>
+        <div class="link-sub">embedded-automotive-learning</div>
+      </div>
+      <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+
+    <!-- TikTok -->
+    <a class="link-card tt" href="https://www.tiktok.com/@embeddedautomotive" target="_blank" rel="noopener">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">TikTok</div>
+        <div class="link-sub">@embeddedautomotive</div>
+      </div>
+      <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+
+  </div>
+
+  <p class="footer">embedded automotive · phong phu nguyen</p>
+</div>
+
+</body>
+</html>
